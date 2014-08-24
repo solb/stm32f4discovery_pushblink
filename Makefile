@@ -1,5 +1,5 @@
 BIN := light
-LDSCRIPT := build/gcc_arm.ld
+LDSCRIPT := build/gcc.ld
 OBJS := boot/startup_ARMCM4.o kern/light.o
 
 vpath %.o boot:kern
@@ -13,7 +13,7 @@ OBJDUMP := $(PREFIX)objdump
 ARCHFLAGS := -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mthumb -mfloat-abi=hard
 ASFLAGS := $(ARCHFLAGS)
 CFLAGS := $(ARCHFLAGS) -std=c99 -g -Wall -Wextra
-LDFLAGS := $(ARCHFLAGS) -specs=rdimon.specs -T $(LDSCRIPT)
+LDFLAGS := $(ARCHFLAGS) -specs=rdimon.specs -T$(LDSCRIPT)
 
 $(BIN): $(OBJS)
 

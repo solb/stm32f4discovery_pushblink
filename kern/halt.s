@@ -5,4 +5,4 @@ main:
 	b	main
 
 SystemInit:
-	b	SystemInit
+	bx	lr

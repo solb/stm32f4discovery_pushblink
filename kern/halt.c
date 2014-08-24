@@ -1,5 +1,7 @@
+#include <stdbool.h>
+
 void SystemInit(void) {}
 
 int main(void) {
-	while(1);
+	while(true);
 }

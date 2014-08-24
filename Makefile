@@ -1,6 +1,6 @@
 BIN := light
-LDSCRIPT := build/stm32_flash.ld
-OBJS := boot/startup_stm32f4xx.o kern/light.o
+LDSCRIPT := build/gcc_arm.ld
+OBJS := boot/startup_ARMCM4.o kern/light.o
 
 vpath %.o boot:kern
 

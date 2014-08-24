@@ -59,12 +59,13 @@ typedef struct {
 
 #define PERIPH_BASE       (uint8_t *)0x40000000
 #define PERIPH_RCC_BASE   (PERIPH_BASE + 0x23800)
-#define PERIPH_GPIO_BASE  (PERIPH_BASE + 0x20000)
-#define PERIPH_GPIOD_BASE (PERIPH_GPIO_BASE + 0xc00)
+#define PERIPH_GPIOA_BASE  (PERIPH_BASE + 0x20000)
+#define PERIPH_GPIOD_BASE (PERIPH_GPIOA_BASE + 0xc00)
 
 int main(void) {
 	rcc_t *rcc = (rcc_t *)PERIPH_RCC_BASE;
-	rcc->ahb1enr |= 1 << /*GPIO module D*/3;
+	rcc->ahb1enr |= 1 << /*GPIO module A*/0 | 1 << /*module D*/3;
+	gpio_t *gpioa = (gpio_t *)PERIPH_GPIOA_BASE;
 	gpio_t *gpiod = (gpio_t *)PERIPH_GPIOD_BASE;
 	gpiod->moder |= /*dout*/1 << (/*pin 13*/13 * 2) | 1 << (14 * 2) | 1 << (12 * 2) | 1 << (15 * 2);
 
@@ -72,7 +73,8 @@ int main(void) {
 		for(uint16_t combo = 0; combo <= 0xf; ++combo) {
 			uint16_t tmp = (gpiod->odr & 0x0fff) | (combo << /*pins 12 and up*/12);
 			gpiod->odr = tmp;
-			for(int spinner = 0; spinner < 1000000; ++spinner);
+			while(!(gpioa->idr & 0x1));
+			while(gpioa->idr & 0x1);
 		}
 	}
 }

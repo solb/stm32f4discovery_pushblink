@@ -10,6 +10,7 @@ CC := $(PREFIX)gcc
 OBJCOPY := $(PREFIX)objcopy
 OBJDUMP := $(PREFIX)objdump
 
+ASFLAGS := -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mthumb -mfloat-abi=hard
 LDFLAGS := -specs=rdimon.specs -T $(LDSCRIPT)
 
 $(BIN): $(OBJS)

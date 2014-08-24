@@ -1,6 +1,6 @@
-BIN := halt
+BIN := light
 LDSCRIPT := build/stm32_flash.ld
-OBJS := boot/startup_stm32f4xx.o kern/halt.o
+OBJS := boot/startup_stm32f4xx.o kern/light.o
 
 vpath %.o boot:kern
 

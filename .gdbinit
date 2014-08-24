@@ -1,2 +1,4 @@
-tar ext :4242
+tar ext :3333
+mo arm semihosting enable
+mo reset halt
 lo

@@ -1,10 +1,10 @@
 #include <stdbool.h>
+#include <stdio.h>
 
 void SystemInit(void) {}
 
 int main(void) {
-	register int test = 3;
-	while(test)
-		--test;
+	printf("Hello, world!\n");
+
 	while(true);
 }

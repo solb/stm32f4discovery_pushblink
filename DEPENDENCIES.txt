@@ -1,5 +1,6 @@
 https://launchpad.net/gcc-arm-embedded - in $PATH
-https://github.com/texane/stlink - in $PATH
+git://git.code.sf.net/p/openocd/code - in $PATH
+	- invoke as $ openocd -s :/code/tcl -f :/code/tcl/board/stm32f4discovery.cfg
 http://www.st.com/web/en/catalog/tools/PF257904
 	- put Libraries/CMSIS/ST/STM32F4xx/Source/Templates/TrueSTUDIO/startup_stm32f4xx.s in :/boot
 	- put Project/Demonstration/TrueSTUDIO/STM32F4-Discovery_Demo/stm32_flash.ld in :/build

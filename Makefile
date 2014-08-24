@@ -10,7 +10,7 @@ CC := $(PREFIX)gcc
 OBJCOPY := $(PREFIX)objcopy
 OBJDUMP := $(PREFIX)objdump
 
-LDFLAGS := -T $(LDSCRIPT)
+LDFLAGS := -specs=rdimon.specs -T $(LDSCRIPT)
 
 $(BIN): $(OBJS)
 

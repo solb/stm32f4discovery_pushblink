@@ -1,4 +1,4 @@
-BIN := halting_kern
+BIN := halt
 LDSCRIPT := build/stm32_flash.ld
 OBJS := boot/startup_stm32f4xx.o kern/halt.o
 
@@ -12,17 +12,14 @@ OBJDUMP := $(PREFIX)objdump
 
 LDFLAGS := -T $(LDSCRIPT)
 
-$(BIN).hex: $(BIN).elf
-	$(OBJCOPY) -O ihex $< $@
-$(BIN).elf: $(OBJS)
-	$(CC) $(LDFLAGS) $(OBJS) $(LOADLIBES) $(LDLIBS) -o $(BIN).elf
+$(BIN): $(OBJS)
 
 clean:
-	$(RM) $(OBJS) $(BIN).elf
+	$(RM) $(OBJS)
 distclean: clean
-	$(RM) $(BIN).hex $(BIN).d $(BIN).t
+	$(RM) $(BIN) $(BIN).d $(BIN).t
 
-%.d: %.elf
+%.d: %
 	$(OBJDUMP) -d $< >$@
-%.t: %.elf
+%.t: %
 	$(OBJDUMP) -t $< >$@

@@ -66,8 +66,13 @@ int main(void) {
 	rcc_t *rcc = (rcc_t *)PERIPH_RCC_BASE;
 	rcc->ahb1enr |= 1 << /*GPIO module D*/3;
 	gpio_t *gpiod = (gpio_t *)PERIPH_GPIOD_BASE;
-	gpiod->moder |= /*dout*/1 << (/*pin 13*/13 * 2);
-	gpiod->odr |= 1 << /*pin 13*/13;
+	gpiod->moder |= /*dout*/1 << (/*pin 13*/13 * 2) | 1 << (14 * 2) | 1 << (12 * 2) | 1 << (15 * 2);
 
-	while(true);
+	while(true) {
+		for(uint16_t combo = 0; combo <= 0xf; ++combo) {
+			uint16_t tmp = (gpiod->odr & 0x0fff) | (combo << /*pins 12 and up*/12);
+			gpiod->odr = tmp;
+			for(int spinner = 0; spinner < 1000000; ++spinner);
+		}
+	}
 }

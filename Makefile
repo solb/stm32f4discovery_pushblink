@@ -7,6 +7,7 @@ vpath %.o boot:kern
 PREFIX := arm-none-eabi-
 AS := $(PREFIX)as
 CC := $(PREFIX)gcc
+DB := $(PREFIX)gdb
 OBJCOPY := $(PREFIX)objcopy
 OBJDUMP := $(PREFIX)objdump
 
@@ -16,6 +17,9 @@ CFLAGS := $(ARCHFLAGS) -std=c99 -g -Wall -Wextra
 LDFLAGS := $(ARCHFLAGS) -specs=rdimon.specs -T$(LDSCRIPT)
 
 $(BIN): $(OBJS)
+
+debug: $(BIN)
+	$(DB) -iex "add-auto-load-safe-path .gdbinit" $<
 
 clean:
 	$(RM) $(OBJS)

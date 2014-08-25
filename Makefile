@@ -1,6 +1,7 @@
 BIN := light
 LDSCRIPT := build/gcc.ld
-OBJS := boot/startup_ARMCM4.o boot/isr_vector_extended.o kern/light.o kern/spec.o
+OBJS := boot/startup_ARMCM4.o boot/isr_vector_extended.o kern/light.o \
+		kern/clock.o kern/gpios.o kern/interrupt.o kern/spec.o kern/system.o
 
 vpath %.o boot:kern
 

@@ -27,17 +27,16 @@ void SystemInit(void) {
 }
 
 void EXTI0_Handler(void) {
+	// Change the LED pattern up!
+	static uint16_t combo = 0;
+	combo = (combo + 1) % 0x10;
+	uint16_t tmp = (gpiod->odr & 0x0fff) | combo << /*pins 12 and up*/12;
+	gpiod->odr = tmp;
+
 	// Inform the external interrupt controller that we handled the IRQ
 	exti->pr = /*line 0*/0x1;
 }
 
 int main(void) {
-	while(true) {
-		for(uint16_t combo = 0; combo <= 0xf; ++combo) {
-			uint16_t tmp = (gpiod->odr & 0x0fff) | combo << /*pins 12 and up*/12;
-			gpiod->odr = tmp;
-			while(!(gpioa->idr & 0x1));
-			while(gpioa->idr & 0x1);
-		}
-	}
+	while(true);
 }

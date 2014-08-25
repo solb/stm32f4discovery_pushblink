@@ -1,19 +1,12 @@
 #include "clock.h"
 #include "gpios.h"
 #include "interrupt.h"
-#include "spec.h"
 #include "system.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
 void SystemInit(void) {
-	// Check interrupt priority mask and fault mask
-	puts("primask is:");
-	puts(get_primask() ? "ACTIVATED" : "normal");
-	puts("faultmask is:");
-	puts(get_faultmask() ? "ACTIVATED" : "normal");
-
 	// Clock the GPIO modules we'll be using
 	rcc->ahb1enr |= 1 << /*GPIO module A*/0 | 1 << /*module D*/3;
 
@@ -34,7 +27,8 @@ void SystemInit(void) {
 }
 
 void EXTI0_Handler(void) {
-	while(true);
+	// Inform the external interrupt controller that we handled the IRQ
+	exti->pr = /*line 0*/0x1;
 }
 
 int main(void) {

@@ -6,6 +6,12 @@
 // Length-8 array
 extern uint32_t *const nvic_iser;
 
+// Length-8 array
+extern uint32_t *const nvic_icpr;
+
+// Length-8 array
+extern uint32_t *const nvic_iabr;
+
 typedef struct {
 	uint32_t imr;
 	uint32_t emr;

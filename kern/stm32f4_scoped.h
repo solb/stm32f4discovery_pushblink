@@ -5,6 +5,8 @@
 	#define SCOPED_SYMBS_DEFINED_
 
 	#define NVIC_ISER_BASE     (uint32_t *)0xe000e100
+	#define NVIC_ICPR_BASE     (uint32_t *)0xe000e280
+	#define NVIC_IABR_BASE     (uint32_t *)0xe000e300
 	#define PERIPH_BASE        (uint8_t *)0x40000000
 	#define PERIPH_SYSCFG_BASE (PERIPH_BASE + 0x13800)
 	#define PERIPH_RCC_BASE    (PERIPH_BASE + 0x23800)

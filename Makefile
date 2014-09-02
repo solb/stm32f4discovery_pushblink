@@ -1,7 +1,6 @@
 BIN := light
 LDSCRIPT := build/gcc.ld
-OBJS := boot/startup_ARMCM4.o boot/isr_vector_extended.o kern/light.o \
-		kern/clock.o kern/gpios.o kern/interrupt.o kern/spec.o kern/system.o
+OBJS := boot/startup_ARMCM4.o boot/isr_vector_extended.o kern/light.o
 
 vpath %.o boot:kern
 
@@ -13,6 +12,7 @@ OBJCOPY := $(PREFIX)objcopy
 OBJDUMP := $(PREFIX)objdump
 
 ARCHFLAGS := -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mthumb -mfloat-abi=hard
+CPPFLAGS := -Ilib/CMSIS/Include -Ilib/CMSIS/Device/ST/STM32F4xx/Include -DSTM32F407xx
 ASFLAGS := $(ARCHFLAGS)
 CFLAGS := $(ARCHFLAGS) -std=c99 -g -Wall -Wextra
 LDFLAGS := $(ARCHFLAGS) -specs=rdimon.specs -T$(LDSCRIPT)
